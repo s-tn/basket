@@ -1,4 +1,2 @@
-src/**
 .xwin-cache/**
-src-tauri/**
 **/node_modules/**
