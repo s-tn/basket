@@ -1,390 +1,390 @@
-import { guess } from "https://cdn.jsdelivr.net/npm/web-audio-beat-detector/+esm";
+// import { guess } from "https://cdn.jsdelivr.net/npm/web-audio-beat-detector/+esm";
 
-window.guess = guess;
+// window.guess = guess;
 
-EventTarget.prototype._nativeEventListener = EventTarget.prototype._nativeEventListener || EventTarget.prototype.addEventListener;
+// EventTarget.prototype._nativeEventListener = EventTarget.prototype._nativeEventListener || EventTarget.prototype.addEventListener;
 
-for (let Obj of [ Window, Document, HTMLIFrameElement ]) {
-    Obj.prototype.addEventListener = new Proxy(Obj.prototype.addEventListener, {
-        apply: (target, thisArg, argumentsList) => {
-            if (argumentsList[1]) {
-                argumentsList[1] = new Proxy(argumentsList[1], {
-                    apply: (target, thisArg, argumentsList) => {
-                        try {
-                            if (document.querySelector("#modMenu")?.contains(argumentsList[0].target)) {
-                                return false;
-                            }
-                        } catch {};
+// for (let Obj of [ Window, Document, HTMLIFrameElement ]) {
+//     Obj.prototype.addEventListener = new Proxy(Obj.prototype.addEventListener, {
+//         apply: (target, thisArg, argumentsList) => {
+//             if (argumentsList[1]) {
+//                 argumentsList[1] = new Proxy(argumentsList[1], {
+//                     apply: (target, thisArg, argumentsList) => {
+//                         try {
+//                             if (document.querySelector("#modMenu")?.contains(argumentsList[0].target)) {
+//                                 return false;
+//                             }
+//                         } catch {};
                         
-                        return target.apply(thisArg, argumentsList);
-                    }
-                });
-            }
-            return target.apply(thisArg, argumentsList);
-        }
-    });
-}
+//                         return target.apply(thisArg, argumentsList);
+//                     }
+//                 });
+//             }
+//             return target.apply(thisArg, argumentsList);
+//         }
+//     });
+// }
 
-const WS_ENDPOINT = "wss://73a59210-8993-4b29-8c5b-b0d9f2edf0f5-00-33hnin010jlp8.janeway.replit.dev";
-const WS = new WebSocket(WS_ENDPOINT);
+// const WS_ENDPOINT = "wss://73a59210-8993-4b29-8c5b-b0d9f2edf0f5-00-33hnin010jlp8.janeway.replit.dev";
+// const WS = new WebSocket(WS_ENDPOINT);
 
-window._mod_WS = WS;
+// window._mod_WS = WS;
 
-WS.onopen = () => {
-    console.log("Connected to server");
-}
+// WS.onopen = () => {
+//     console.log("Connected to server");
+// }
 
-WS.onmessage = (event) => {
-    console.log(event.data);
-    if (event.data.startsWith('connect-req:')) {
-        const id = event.data.split(':')[1];
-        if (confirm(`Player ${id} wants to connect to you. Accept?`)) {
-            sendRequest(`connect-accept:${id}`);
-            connecting = true;
-            window.opponent = id;
-        } else {
-            sendRequest(`connect-reject:${id}`);
-        }
-    }
-    if (event.data.startsWith('connect-accepted')) {
-        const id = event.data.split(':')[1];
-        window.opponent = id;
+// WS.onmessage = (event) => {
+//     console.log(event.data);
+//     if (event.data.startsWith('connect-req:')) {
+//         const id = event.data.split(':')[1];
+//         if (confirm(`Player ${id} wants to connect to you. Accept?`)) {
+//             sendRequest(`connect-accept:${id}`);
+//             connecting = true;
+//             window.opponent = id;
+//         } else {
+//             sendRequest(`connect-reject:${id}`);
+//         }
+//     }
+//     if (event.data.startsWith('connect-accepted')) {
+//         const id = event.data.split(':')[1];
+//         window.opponent = id;
 
-        window.basketLoading.then(() => setInterval(() => {
-            if (multiplayer === true) {
-                sendRequest(`data-json:${JSON.stringify({
-                    type: "event",
-                    event: "update",
-                    target: opponent,
-                    players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
-                    heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
-                    ball: { x: window.ball.x, y: window.ball.y, instVars: {hold: window.ball.instVars.hold, who: window.ball.instVars.who} },
-                })}`);
-            }
-        }, 10));
-    }
-    if (event.data.startsWith('ids-available')) {
-        const ids = event.data.split(':')[1].split(',').filter(e => !!e);
-        if (ids.find((id) => id === multiplayerId)) {
-            ids.splice(ids.indexOf(multiplayerId), 1);
-        }
-        if (ids.length >= 1) {
-            if (JSON.stringify(ids) === JSON.stringify([
-                ...[...document.querySelectorAll('.player + span')].map((player) => player.textContent),
-            ])) {
-                return;
-            }
+//         window.basketLoading.then(() => setInterval(() => {
+//             if (multiplayer === true) {
+//                 sendRequest(`data-json:${JSON.stringify({
+//                     type: "event",
+//                     event: "update",
+//                     target: opponent,
+//                     players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
+//                     heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
+//                     ball: { x: window.ball.x, y: window.ball.y, instVars: {hold: window.ball.instVars.hold, who: window.ball.instVars.who} },
+//                 })}`);
+//             }
+//         }, 10));
+//     }
+//     if (event.data.startsWith('ids-available')) {
+//         const ids = event.data.split(':')[1].split(',').filter(e => !!e);
+//         if (ids.find((id) => id === multiplayerId)) {
+//             ids.splice(ids.indexOf(multiplayerId), 1);
+//         }
+//         if (ids.length >= 1) {
+//             if (JSON.stringify(ids) === JSON.stringify([
+//                 ...[...document.querySelectorAll('.player + span')].map((player) => player.textContent),
+//             ])) {
+//                 return;
+//             }
 
-            document.getElementById('connect-button').disabled = false;
+//             document.getElementById('connect-button').disabled = false;
 
-            const availablePlayers = document.getElementById('available-players');
-            availablePlayers.innerHTML = '';
+//             const availablePlayers = document.getElementById('available-players');
+//             availablePlayers.innerHTML = '';
 
-            for (let id of ids) {
-                if (id !== multiplayerId) {
-                    const player = document.createElement('input');
-                    player.type = "radio";
-                    player.name = "player";
-                    player.className = 'player';
-                    player.value = id;
+//             for (let id of ids) {
+//                 if (id !== multiplayerId) {
+//                     const player = document.createElement('input');
+//                     player.type = "radio";
+//                     player.name = "player";
+//                     player.className = 'player';
+//                     player.value = id;
 
-                    availablePlayers.appendChild(player);
-                    availablePlayers.innerHTML += `<span>${id}</span><br />`;
-                }
-            }
-        }
-    }
+//                     availablePlayers.appendChild(player);
+//                     availablePlayers.innerHTML += `<span>${id}</span><br />`;
+//                 }
+//             }
+//         }
+//     }
 
-    if (event.data.startsWith('data-json:')) {
-        const data = JSON.parse(event.data.split('data-json:')[1]);
-        runJsonData(data);
-    }
-}
+//     if (event.data.startsWith('data-json:')) {
+//         const data = JSON.parse(event.data.split('data-json:')[1]);
+//         runJsonData(data);
+//     }
+// }
 
-WS.onclose = () => {
-    console.log("Disconnected from server");
-}
+// WS.onclose = () => {
+//     console.log("Disconnected from server");
+// }
 
-function sendRequest(request) {
-    WS.send(request);
-}
+// function sendRequest(request) {
+//     WS.send(request);
+// }
 
-function runJsonData(data = {}) {   
-    if (data.target !== multiplayerId) {
-        return false;
-    }
+// function runJsonData(data = {}) {   
+//     if (data.target !== multiplayerId) {
+//         return false;
+//     }
 
-    if (data.type === "event") {
-        if (data.event === "keydown") {
-            for (let [index, player] of enumerate(data.players)) {
-                const playerInstance = window.players.find((p, i) => index === i);
-                if (!playerInstance) {
-                    continue;
-                }
-                playerInstance.x = player.x;
-                playerInstance.y = player.y;
-                for (let [key, value] of Object.entries(player.instVars)) {
-                    playerInstance.instVars[key] = value;
-                }
-            }
+//     if (data.type === "event") {
+//         if (data.event === "keydown") {
+//             for (let [index, player] of enumerate(data.players)) {
+//                 const playerInstance = window.players.find((p, i) => index === i);
+//                 if (!playerInstance) {
+//                     continue;
+//                 }
+//                 playerInstance.x = player.x;
+//                 playerInstance.y = player.y;
+//                 for (let [key, value] of Object.entries(player.instVars)) {
+//                     playerInstance.instVars[key] = value;
+//                 }
+//             }
 
-            for (let [index, head] of enumerate(data.heads)) {
-                const headInstance = window.heads.find((p, i) => index === i);
-                if (!headInstance) {
-                    continue;
-                }
-                headInstance.x = head.x;
-                headInstance.y = head.y;
-                for (let [key, value] of Object.entries(head.instVars)) {
-                    headInstance.instVars[key] = value;
-                }
-            }
+//             for (let [index, head] of enumerate(data.heads)) {
+//                 const headInstance = window.heads.find((p, i) => index === i);
+//                 if (!headInstance) {
+//                     continue;
+//                 }
+//                 headInstance.x = head.x;
+//                 headInstance.y = head.y;
+//                 for (let [key, value] of Object.entries(head.instVars)) {
+//                     headInstance.instVars[key] = value;
+//                 }
+//             }
 
-            const ballInstance = window.ball;
-            ballInstance.x = data.ball.x;
-            ballInstance.y = data.ball.y;
-            for (let [key, value] of Object.entries(data.ball.instVars)) {
-                ballInstance.instVars[key] = value;
-            }
+//             const ballInstance = window.ball;
+//             ballInstance.x = data.ball.x;
+//             ballInstance.y = data.ball.y;
+//             for (let [key, value] of Object.entries(data.ball.instVars)) {
+//                 ballInstance.instVars[key] = value;
+//             }
 
-            const event = new KeyboardEvent('keydown', {
-                key: data.key,
-                which: data.which,
-                keyCode: data.keyCode,
-                code: data.code,
-            });
+//             const event = new KeyboardEvent('keydown', {
+//                 key: data.key,
+//                 which: data.which,
+//                 keyCode: data.keyCode,
+//                 code: data.code,
+//             });
 
-            window.dispatchEvent(event);
-        } else if (data.event === "keyup") {
-            const event = new KeyboardEvent('keyup', {
-                key: data.key,
-                which: data.which,
-                keyCode: data.keyCode,
-                code: data.code,
-            });
+//             window.dispatchEvent(event);
+//         } else if (data.event === "keyup") {
+//             const event = new KeyboardEvent('keyup', {
+//                 key: data.key,
+//                 which: data.which,
+//                 keyCode: data.keyCode,
+//                 code: data.code,
+//             });
 
-            window.dispatchEvent(event);
-        } else if (data.event === "update") {
-            if (keys['w'] || keys['W'] || keys['ArrowUp']) {
-                return false;
-            }
-            for (let [index, player] of enumerate(data.players)) {
-                const playerInstance = window.players.find((p, i) => index === i);
-                if (!playerInstance) {
-                    continue;
-                }
-                playerInstance.x = player.x;
-                playerInstance.y = player.y;
-                for (let [key, value] of Object.entries(player.instVars)) {
-                    playerInstance.instVars[key] = value;
-                }
-            }
+//             window.dispatchEvent(event);
+//         } else if (data.event === "update") {
+//             if (keys['w'] || keys['W'] || keys['ArrowUp']) {
+//                 return false;
+//             }
+//             for (let [index, player] of enumerate(data.players)) {
+//                 const playerInstance = window.players.find((p, i) => index === i);
+//                 if (!playerInstance) {
+//                     continue;
+//                 }
+//                 playerInstance.x = player.x;
+//                 playerInstance.y = player.y;
+//                 for (let [key, value] of Object.entries(player.instVars)) {
+//                     playerInstance.instVars[key] = value;
+//                 }
+//             }
 
-            for (let [index, head] of enumerate(data.heads)) {
-                const headInstance = window.heads.find((p, i) => index === i);
-                if (!headInstance) {
-                    continue;
-                }
-                headInstance.x = head.x;
-                headInstance.y = head.y;
-                for (let [key, value] of Object.entries(head.instVars)) {
-                    headInstance.instVars[key] = value;
-                }
-            }
+//             for (let [index, head] of enumerate(data.heads)) {
+//                 const headInstance = window.heads.find((p, i) => index === i);
+//                 if (!headInstance) {
+//                     continue;
+//                 }
+//                 headInstance.x = head.x;
+//                 headInstance.y = head.y;
+//                 for (let [key, value] of Object.entries(head.instVars)) {
+//                     headInstance.instVars[key] = value;
+//                 }
+//             }
 
-            const ballInstance = window.ball;
-            ballInstance.x = data.ball.x;
-            ballInstance.y = data.ball.y;
-            for (let [key, value] of Object.entries(data.ball.instVars)) {
-                ballInstance.instVars[key] = value;
-            }
-        }
-    }
-}   
+//             const ballInstance = window.ball;
+//             ballInstance.x = data.ball.x;
+//             ballInstance.y = data.ball.y;
+//             for (let [key, value] of Object.entries(data.ball.instVars)) {
+//                 ballInstance.instVars[key] = value;
+//             }
+//         }
+//     }
+// }   
 
-class TabRecorder {
-    constructor() {
-        this.mediaRecorder = null;
-        this.chunks = [];
-        this.isRecording = false;
-    }
+// class TabRecorder {
+//     constructor() {
+//         this.mediaRecorder = null;
+//         this.chunks = [];
+//         this.isRecording = false;
+//     }
 
-    async startRecording() {
-        if (this.isRecording) {
-            console.warn("Recording is already in progress.");
-            return;
-        }
+//     async startRecording() {
+//         if (this.isRecording) {
+//             console.warn("Recording is already in progress.");
+//             return;
+//         }
 
-        try {
-            const stream = document.querySelector('canvas').captureStream(45);
-            this.chunks = [];
-            this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9' }); // Adjust mimeType as per compatibility
+//         try {
+//             const stream = document.querySelector('canvas').captureStream(45);
+//             this.chunks = [];
+//             this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9' }); // Adjust mimeType as per compatibility
 
-            this.mediaRecorder.ondataavailable = event => {
-                if (event.data.size > 0) {
-                    this.chunks.push(event.data);
-                }
-            };
+//             this.mediaRecorder.ondataavailable = event => {
+//                 if (event.data.size > 0) {
+//                     this.chunks.push(event.data);
+//                 }
+//             };
 
-            this.mediaRecorder.start(1000); // Experiment with different timeslice values
-            this.isRecording = true;
-            console.log("Recording started.");
-        } catch (error) {
-            console.error("Error starting recording:", error);
-        }
-    }
+//             this.mediaRecorder.start(1000); // Experiment with different timeslice values
+//             this.isRecording = true;
+//             console.log("Recording started.");
+//         } catch (error) {
+//             console.error("Error starting recording:", error);
+//         }
+//     }
 
-    stopRecording() {
-        if (!this.isRecording) {
-            console.warn("No recording in progress to stop.");
-            return;
-        }
+//     stopRecording() {
+//         if (!this.isRecording) {
+//             console.warn("No recording in progress to stop.");
+//             return;
+//         }
 
-        this.mediaRecorder.stop();
-        this.isRecording = false;
-        console.log("Recording stopped.");
-    }
+//         this.mediaRecorder.stop();
+//         this.isRecording = false;
+//         console.log("Recording stopped.");
+//     }
 
-    saveRecording() {
-        const blob = new Blob(this.chunks, { type: 'video/webm' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'recording.webm';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        console.log("Recording saved.");
-    }
-}
+//     saveRecording() {
+//         const blob = new Blob(this.chunks, { type: 'video/webm' });
+//         const url = URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = 'recording.webm';
+//         document.body.appendChild(a);
+//         a.click();
+//         document.body.removeChild(a);
+//         URL.revokeObjectURL(url);
+//         console.log("Recording saved.");
+//     }
+// }
 
-class TabClipper {
-    constructor() {
-        this.recorders = [];
-    }
+// class TabClipper {
+//     constructor() {
+//         this.recorders = [];
+//     }
 
-    startCapturing() {
-        this.recorders = [];
-        this.recorders.push(new TabRecorder());
-        this.recorders[0].startRecording();
+//     startCapturing() {
+//         this.recorders = [];
+//         this.recorders.push(new TabRecorder());
+//         this.recorders[0].startRecording();
 
-        setInterval(() => {
-            this.addRecorder();
-        }, 10000);
-    }
+//         setInterval(() => {
+//             this.addRecorder();
+//         }, 10000);
+//     }
 
-    addRecorder() {
-        let index = this.recorders.push(new TabRecorder()) - 1;
-        this.recorders.at(index).startRecording();
+//     addRecorder() {
+//         let index = this.recorders.push(new TabRecorder()) - 1;
+//         this.recorders.at(index).startRecording();
 
-        setTimeout(() => {
-            this.recorders.at(index).stopRecording();
-            this.recorders.splice(index, 1);
-        }, 30000);
-    }
+//         setTimeout(() => {
+//             this.recorders.at(index).stopRecording();
+//             this.recorders.splice(index, 1);
+//         }, 30000);
+//     }
 
-    stopCapturing() {
-        for (let recorder of this.recorders) {
-            recorder.stopRecording();
-        }
-    }
+//     stopCapturing() {
+//         for (let recorder of this.recorders) {
+//             recorder.stopRecording();
+//         }
+//     }
 
-    saveClip() {
-        this.recorders.at(0).saveRecording();
-    }
-}
+//     saveClip() {
+//         this.recorders.at(0).saveRecording();
+//     }
+// }
 
-const clipper = new TabClipper();
+// const clipper = new TabClipper();
 
-window._nativeEventListener('keydown', (event) => {
-    if (!event.isTrusted) {
-        return false;
-    }
-    if (multiplayer === true) {
-        if (event.key === "w") {
-            sendRequest(`data-json:${JSON.stringify({
-                type: "event",
-                event: "keydown",
-                key: "w",
-                which: 87,
-                keyCode: 87,
-                code: "KeyW",
-                target: opponent,
-                players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
-                heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
-                ball: { x: window.ball.x, y: window.ball.y, instVars: window.ball.instVars },
-            })}`);
-        } else if (event.key === "ArrowUp") {
-            sendRequest(`data-json:${JSON.stringify({
-                type: "event",
-                event: "keydown",
-                key: "ArrowUp",
-                which: 38,
-                keyCode: 38,
-                code: "ArrowUp",
-                target: opponent,
-                players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
-                heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
-                ball: { x: window.ball.x, y: window.ball.y, instVars: window.ball.instVars },
-            })}`);
-        }
-    }
-});
+// window._nativeEventListener('keydown', (event) => {
+//     if (!event.isTrusted) {
+//         return false;
+//     }
+//     if (multiplayer === true) {
+//         if (event.key === "w") {
+//             sendRequest(`data-json:${JSON.stringify({
+//                 type: "event",
+//                 event: "keydown",
+//                 key: "w",
+//                 which: 87,
+//                 keyCode: 87,
+//                 code: "KeyW",
+//                 target: opponent,
+//                 players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
+//                 heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
+//                 ball: { x: window.ball.x, y: window.ball.y, instVars: window.ball.instVars },
+//             })}`);
+//         } else if (event.key === "ArrowUp") {
+//             sendRequest(`data-json:${JSON.stringify({
+//                 type: "event",
+//                 event: "keydown",
+//                 key: "ArrowUp",
+//                 which: 38,
+//                 keyCode: 38,
+//                 code: "ArrowUp",
+//                 target: opponent,
+//                 players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
+//                 heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
+//                 ball: { x: window.ball.x, y: window.ball.y, instVars: window.ball.instVars },
+//             })}`);
+//         }
+//     }
+// });
 
-window._nativeEventListener('keyup', (event) => {
-    if (!event.isTrusted) {
-        return false;
-    }
-    if (multiplayer === true) {
-        if (event.key === "w") {
-            sendRequest(`data-json:${JSON.stringify({
-                type: "event",
-                event: "keyup",
-                key: "w",
-                which: 87,
-                keyCode: 87,
-                code: "KeyW",
-                target: opponent,
-            })}`);
-        } else if (event.key === "ArrowUp") {
-            sendRequest(`data-json:${JSON.stringify({
-                type: "event",
-                event: "keyup",
-                key: "ArrowUp",
-                which: 38,
-                keyCode: 38,
-                code: "ArrowUp",
-                target: opponent,
-            })}`);
-        }
-    }
-});
+// window._nativeEventListener('keyup', (event) => {
+//     if (!event.isTrusted) {
+//         return false;
+//     }
+//     if (multiplayer === true) {
+//         if (event.key === "w") {
+//             sendRequest(`data-json:${JSON.stringify({
+//                 type: "event",
+//                 event: "keyup",
+//                 key: "w",
+//                 which: 87,
+//                 keyCode: 87,
+//                 code: "KeyW",
+//                 target: opponent,
+//             })}`);
+//         } else if (event.key === "ArrowUp") {
+//             sendRequest(`data-json:${JSON.stringify({
+//                 type: "event",
+//                 event: "keyup",
+//                 key: "ArrowUp",
+//                 which: 38,
+//                 keyCode: 38,
+//                 code: "ArrowUp",
+//                 target: opponent,
+//             })}`);
+//         }
+//     }
+// });
 
-Object.defineProperties(window, {
-    "ball": {
-        get: () => c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0],
-    },
-    "players": {
-        get: () => [
-            c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()[0],
-        ],
-    },
-    "heads": {
-        get: () => [
-            c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances()[0],
-            c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()[0],
-        ],
-    },
-    "globalVars": {
-        get: () => c3_runtimeInterface._localRuntime._iRuntime.globalVars,
-    }
-});
+// Object.defineProperties(window, {
+//     "ball": {
+//         get: () => c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0],
+//     },
+//     "players": {
+//         get: () => [
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()[0],
+//         ],
+//     },
+//     "heads": {
+//         get: () => [
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances()[0],
+//             c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()[0],
+//         ],
+//     },
+//     "globalVars": {
+//         get: () => c3_runtimeInterface._localRuntime._iRuntime.globalVars,
+//     }
+// });
 
 function resetPractice() {
     var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];

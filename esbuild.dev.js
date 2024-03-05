@@ -8,7 +8,7 @@ const build = await esbuild.context({
   entryPoints: ["scripts/mods/index.ts"],
   bundle: true,
   outfile: "scripts/modmenu.js",
-  format: "iife",
+  format: "esm",
   minify: true,
   platform: "browser",
   sourcemap: true,
