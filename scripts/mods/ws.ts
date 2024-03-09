@@ -183,7 +183,7 @@ export default function ws(menu: ModMenu) {
         }
     }   
 
-    window._nativeEventListener('keydown', (event: Event) => {
+    window.addEventListener('keydown', (event: Event) => {
         if (!event.isTrusted) {
             return false;
         }
@@ -218,7 +218,7 @@ export default function ws(menu: ModMenu) {
         }
     });
     
-    window._nativeEventListener('keyup', (event) => {
+    window.addEventListener('keyup', (event) => {
         if (!event.isTrusted) {
             return false;
         }

@@ -11,12 +11,19 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
+    "@types/react": "^18.2.63",
+    "@types/react-dom": "^18.2.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "web-audio-beat-detector": "^8.2.4"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",
     "@types/web": "^0.0.140",
     "@typescript/lib-dom": "npm:@types/web@^0.0.140",
+    "css-tree": "^2.3.1",
+    "esbuild": "^0.20.1",
+    "esbuild-css-modules-plugin": "^3.1.0",
     "typescript": "^5.0.2",
     "vite": "^5.0.0"
   }

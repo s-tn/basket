@@ -386,24 +386,24 @@
 //     }
 // });
 
-function resetPractice() {
-    var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
-    var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+// function resetPractice() {
+//     var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+//     var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
 
-    player.x = resetX();
-    player.y = 136;
-    player.instVars.angular = 0;
-    player.instVars.angle = 0;
-    player.instVars.degreeAngle = 0;
+//     player.x = resetX();
+//     player.y = 136;
+//     player.instVars.angular = 0;
+//     player.instVars.angle = 0;
+//     player.instVars.degreeAngle = 0;
 
-    head.x = resetX();
-    head.y = 136;
-    head.instVars.angular = 0;
-    head.instVars.angle = 0;
-    head.instVars.degreeAngle = 0;
+//     head.x = resetX();
+//     head.y = 136;
+//     head.instVars.angular = 0;
+//     head.instVars.angle = 0;
+//     head.instVars.degreeAngle = 0;
 
-    giveBall(practicePlayer);
-}
+//     giveBall(practicePlayer);
+// }
 
 let multiplayer = false;
 let multiplayerId = null;
@@ -445,250 +445,250 @@ async function crazyMode() {
 }, 10);
 }
 
-let singlePlayer = false;
-let practicing = false;
+// let singlePlayer = false;
+// let practicing = false;
 
-async function singlePlayers() {
-    await window.basketLoading;
+// async function singlePlayers() {
+//     await window.basketLoading;
 
-    dropBall();
-    singlePlayer = true;
+//     dropBall();
+//     singlePlayer = true;
 
-    for (var [i1, i2, i3, i4] of [
-        [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
-        [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
-    ]]) {
-        i1.instVars._x = i1.x;
-        i1.instVars._y = i1.y;
-        i1.instVars._angle = i1.angle;
-        i1.instVars._angular = i1.instVars.angular;
+//     for (var [i1, i2, i3, i4] of [
+//         [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
+//         [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
+//     ]]) {
+//         i1.instVars._x = i1.x;
+//         i1.instVars._y = i1.y;
+//         i1.instVars._angle = i1.angle;
+//         i1.instVars._angular = i1.instVars.angular;
 
-        i3.instVars._x = i3.x;
-        i3.instVars._y = i3.y;
-        i3.instVars._angle = i3.angle;
-        i3.instVars._angular = i3.instVars.angular;
+//         i3.instVars._x = i3.x;
+//         i3.instVars._y = i3.y;
+//         i3.instVars._angle = i3.angle;
+//         i3.instVars._angular = i3.instVars.angular;
 
-        i1.x = 1000;
-        i3.x = 1000;
-    }
-}
+//         i1.x = 1000;
+//         i3.x = 1000;
+//     }
+// }
 
-let practicePlayer = 4;
+// let practicePlayer = 4;
 
-async function practiceMode() {
-    await window.basketLoading;
+// async function practiceMode() {
+//     await window.basketLoading;
 
-    dropBall();
-    if (practicing === false) {
-        //c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0]?.destroy();
-    }
-    practicing = true;
+//     dropBall();
+//     if (practicing === false) {
+//         //c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0]?.destroy();
+//     }
+//     practicing = true;
 
-    var bodies = [
-        c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()[0],
-    ].filter(body => body !== c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0]);
+//     var bodies = [
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()[0],
+//     ].filter(body => body !== c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0]);
 
-    var heads = [
-        c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances()[0],
-        c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()[0],
-    ].filter(head => head !== c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0]);
+//     var heads = [
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances()[0],
+//         c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()[0],
+//     ].filter(head => head !== c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0]);
 
-    for (var [i1, i2, i3, i4] of [bodies, heads]) {
-        i1.instVars._x = i1.x;
-        i1.instVars._y = i1.y;
-        i1.instVars._angle = i1.angle;
-        i1.instVars._angular = i1.instVars.angular;
+//     for (var [i1, i2, i3, i4] of [bodies, heads]) {
+//         i1.instVars._x = i1.x;
+//         i1.instVars._y = i1.y;
+//         i1.instVars._angle = i1.angle;
+//         i1.instVars._angular = i1.instVars.angular;
     
-        i2.instVars._x = i2.x;
-        i2.instVars._y = i2.y;
-        i2.instVars._angle = i2.angle;
-        i2.instVars._angular = i2.instVars.angular;
+//         i2.instVars._x = i2.x;
+//         i2.instVars._y = i2.y;
+//         i2.instVars._angle = i2.angle;
+//         i2.instVars._angular = i2.instVars.angular;
 
-        i3.instVars._x = i3.x;
-        i3.instVars._y = i3.y;
-        i3.instVars._angle = i3.angle;
-        i3.instVars._angular = i3.instVars.angular;
+//         i3.instVars._x = i3.x;
+//         i3.instVars._y = i3.y;
+//         i3.instVars._angle = i3.angle;
+//         i3.instVars._angular = i3.instVars.angular;
 
-        i1.x = 1000;
-        i2.x = 1000;
-        i3.x = 1000;
-    }
+//         i1.x = 1000;
+//         i2.x = 1000;
+//         i3.x = 1000;
+//     }
 
-    var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
-    // var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+//     var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+//     // var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
 
-    player.instVars._x = player.x;
-    player.instVars._y = player.y;
-    player.instVars._angle = player.angle;
-    player.instVars._angular = player.instVars.angular;
+//     player.instVars._x = player.x;
+//     player.instVars._y = player.y;
+//     player.instVars._angle = player.angle;
+//     player.instVars._angular = player.instVars.angular;
 
-    giveBall(practicePlayer);
-}
+//     giveBall(practicePlayer);
+// }
 
-var resetX = () => {
-    switch(practicePlayer) {
-        case 1:
-            return 125;
-        case 2:
-            return 210;
-        case 3:
-            return 175;
-        case 4:
-            return 100;
-    }
-}
+// var resetX = () => {
+//     switch(practicePlayer) {
+//         case 1:
+//             return 125;
+//         case 2:
+//             return 210;
+//         case 3:
+//             return 175;
+//         case 4:
+//             return 100;
+//     }
+// }
 
-_nativeEventListener('keypress', (event) => {
-    if (!practicing) {
-        return;
-    }
+// _nativeEventListener('keypress', (event) => {
+//     if (!practicing) {
+//         return;
+//     }
 
-    if (event.key === "b") {
-        giveBall(practicePlayer);
-    }
+//     if (event.key === "b") {
+//         giveBall(practicePlayer);
+//     }
 
-    if (event.key === "r") {
-        giveBall(practicePlayer);
-        var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
-        var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+//     if (event.key === "r") {
+//         giveBall(practicePlayer);
+//         var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
+//         var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (practicePlayer === 1 ? "" : practicePlayer)].getAllInstances()[0];
 
-        player.x = resetX();
-        player.y = 136;
-        player.instVars.angular = 0;
-        player.instVars.angle = 0;
-        player.instVars.degreeAngle = 0;
+//         player.x = resetX();
+//         player.y = 136;
+//         player.instVars.angular = 0;
+//         player.instVars.angle = 0;
+//         player.instVars.degreeAngle = 0;
 
-        head.x = resetX();
-        head.y = 136;
-        head.instVars.angular = 0;
-        head.instVars.angle = 0;
-        head.instVars.degreeAngle = 0;
-    }
-});
+//         head.x = resetX();
+//         head.y = 136;
+//         head.instVars.angular = 0;
+//         head.instVars.angle = 0;
+//         head.instVars.degreeAngle = 0;
+//     }
+// });
 
-function giveBall(body) {
-    var ball = c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0];
+// function giveBall(body) {
+//     var ball = c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0];
 
-    ball.instVars.hold = 1;
-    ball.instVars.who = body;
-}
+//     ball.instVars.hold = 1;
+//     ball.instVars.who = body;
+// }
 
-function dropBall() {
-    var ball = c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0];
+// function dropBall() {
+//     var ball = c3_runtimeInterface._localRuntime._iRuntime.objects.balls.getAllInstances()[0];
 
-    ball.instVars.hold = 0;
-    ball.instVars.who = -1;
-}
+//     ball.instVars.hold = 0;
+//     ball.instVars.who = -1;
+// }
 
-document.head.insertAdjacentHTML('beforeend', `
-<style>
-    .mod-menu {
-        width: 350px;
-        background: #000;
-        border: 1px solid #ccc;
-        position: fixed;
-        top: 50px;
-        left: 50px;
-        z-index: 1000;
-    }
+// document.head.insertAdjacentHTML('beforeend', `
+// <style>
+//     .mod-menu {
+//         width: 350px;
+//         background: #000;
+//         border: 1px solid #ccc;
+//         position: fixed;
+//         top: 50px;
+//         left: 50px;
+//         z-index: 1000;
+//     }
 
-    #gravity-value {
-        width: 15px;
-        display: inline-block;
-        padding-left: 3px;
-    }
+//     #gravity-value {
+//         width: 15px;
+//         display: inline-block;
+//         padding-left: 3px;
+//     }
 
-    .mod-menu.minimized {
-        display: none;
-    }
+//     .mod-menu.minimized {
+//         display: none;
+//     }
     
-    .title-bar {
-        background: #333;
-        color: white;
-        padding: 5px;
-        cursor: move;
-    }
+//     .title-bar {
+//         background: #333;
+//         color: white;
+//         padding: 5px;
+//         cursor: move;
+//     }
     
-    .content {
-        padding: 10px;
-    }
+//     .content {
+//         padding: 10px;
+//     }
     
-    .minimize-button {
-        float: right;
-        cursor: pointer;
-        color: white;
-        background: none;
-        border: none;
-    }
-</style>
-`);
+//     .minimize-button {
+//         float: right;
+//         cursor: pointer;
+//         color: white;
+//         background: none;
+//         border: none;
+//     }
+// </style>
+// `);
 
-// Create mod menu element
-const modMenu = document.createElement('div');
-modMenu.id = 'modMenu';
-modMenu.className = 'mod-menu';
+// // Create mod menu element
+// const modMenu = document.createElement('div');
+// modMenu.id = 'modMenu';
+// modMenu.className = 'mod-menu';
 
-// Create title bar
-const titleBar = document.createElement('div');
-titleBar.className = 'title-bar';
+// // Create title bar
+// const titleBar = document.createElement('div');
+// titleBar.className = 'title-bar';
 
-// Create content area
-const content = document.createElement('div');
-content.className = 'content';
-// Add your mod menu content here
+// // Create content area
+// const content = document.createElement('div');
+// content.className = 'content';
+// // Add your mod menu content here
 
-content.innerHTML = `
-    <h1>Random Mods</h1>
-    <label for="modSlider">Gravity (4 default)</label>
-    <span id="gravity-value">4</span>
-    <input type="range" id="gravity-changer" min="0" max="30" value="4">
-    <label for="activate-oneone">Activate 1v1 Game</label>
-    <button id="activate-oneone">Activate</button>
-    <br />
-    <label for="activate-practice">Activate Practice</label>
-    <button id="activate-practice">Activate</button>
-    <form class="practice-form">
-        <input type="radio" id="player1-practice" name="practice" value="1">
-        <label for="player1-practice">Player 1</label><br>
+// content.innerHTML = `
+//     <h1>Random Mods</h1>
+//     <label for="modSlider">Gravity (4 default)</label>
+//     <span id="gravity-value">4</span>
+//     <input type="range" id="gravity-changer" min="0" max="30" value="4">
+//     <label for="activate-oneone">Activate 1v1 Game</label>
+//     <button id="activate-oneone">Activate</button>
+//     <br />
+//     <label for="activate-practice">Activate Practice</label>
+//     <button id="activate-practice">Activate</button>
+//     <form class="practice-form">
+//         <input type="radio" id="player1-practice" name="practice" value="1">
+//         <label for="player1-practice">Player 1</label><br>
 
-        <input type="radio" id="player2-practice" name="practice" value="2">
-        <label for="player2-practice">Player 2</label><br>
+//         <input type="radio" id="player2-practice" name="practice" value="2">
+//         <label for="player2-practice">Player 2</label><br>
 
-        <input type="radio" id="player3-practice" name="practice" value="3">
-        <label for="player3-practice">Player 3</label><br>
+//         <input type="radio" id="player3-practice" name="practice" value="3">
+//         <label for="player3-practice">Player 3</label><br>
 
-        <input type="radio" id="player4-practice" name="practice" value="4" checked>
-        <label for="player4-practice">Player 4</label><br>
-    </form>
-    <hr />
-    <h2>Multiplayer</h2>
-    <label for="enable-multi">Enable</label>
-    <input type="checkbox" id="enable-multi" name="enable multiplayer" value="Enable">
-    <br />
-    <h3 style="margin-bottom: 5px;">Available Players:</h3>
-    <h5 style="margin-top: 0px; margin-bottom: 5px;">Your ID: <span id="multi-id">${multiplayerId || ''}</span></h5>
-    <form id="available-players" style="margin-bottom: 5px;"></form>
-    <button id="connect-button" disabled="true">Connect</button>
-    <hr />
-    <h2>Clipping</h2>
-    <label for="enable-clip">Enable</label>
-    <input type="checkbox" id="enable-clip" name="enable clipping" value="Enable">
-    <span id="clip-time">00:00</span>
-    <br />
-    <button id="capture-30s" disabled="true">Record Last 30 seconds</button>
-    <hr />
-    <h2>Custom Score</h2>
-    <h5 style="margin-top: 0px; margin-bottom: 5px;">Current: <span id="score-value">5</span></h5>
-    <label for="score">Score</label>
-    <span id="score-current" style="width: 16px; display: inline-block; text-align: center;">5</span>
-    <input type="range" id="score" min="0" max="20" value="5">
-    <button id="score-submit">Save</button>
-`;
+//         <input type="radio" id="player4-practice" name="practice" value="4" checked>
+//         <label for="player4-practice">Player 4</label><br>
+//     </form>
+//     <hr />
+//     <h2>Multiplayer</h2>
+//     <label for="enable-multi">Enable</label>
+//     <input type="checkbox" id="enable-multi" name="enable multiplayer" value="Enable">
+//     <br />
+//     <h3 style="margin-bottom: 5px;">Available Players:</h3>
+//     <h5 style="margin-top: 0px; margin-bottom: 5px;">Your ID: <span id="multi-id">${multiplayerId || ''}</span></h5>
+//     <form id="available-players" style="margin-bottom: 5px;"></form>
+//     <button id="connect-button" disabled="true">Connect</button>
+//     <hr />
+//     <h2>Clipping</h2>
+//     <label for="enable-clip">Enable</label>
+//     <input type="checkbox" id="enable-clip" name="enable clipping" value="Enable">
+//     <span id="clip-time">00:00</span>
+//     <br />
+//     <button id="capture-30s" disabled="true">Record Last 30 seconds</button>
+//     <hr />
+//     <h2>Custom Score</h2>
+//     <h5 style="margin-top: 0px; margin-bottom: 5px;">Current: <span id="score-value">5</span></h5>
+//     <label for="score">Score</label>
+//     <span id="score-current" style="width: 16px; display: inline-block; text-align: center;">5</span>
+//     <input type="range" id="score" min="0" max="20" value="5">
+//     <button id="score-submit">Save</button>
+// `;
 
 let clippingTime = 0;
 
@@ -701,13 +701,13 @@ setInterval(() => {
     }
 }, 100);
 
-content.querySelector('.practice-form')._nativeEventListener('change', (event) => {
-    const form = document.querySelector('.practice-form');
-    const data = new FormData(form);
-    const selectedPlayer = data.get('practice');
+// content.querySelector('.practice-form')._nativeEventListener('change', (event) => {
+//     const form = document.querySelector('.practice-form');
+//     const data = new FormData(form);
+//     const selectedPlayer = data.get('practice');
 
-    practicePlayer = parseInt(selectedPlayer);
-});
+//     practicePlayer = parseInt(selectedPlayer);
+// });
 
 // Append elements
 modMenu.appendChild(titleBar);
@@ -729,19 +729,19 @@ content.querySelector('#enable-multi')._nativeEventListener('input', () => {
     }
 });
 
-let scoreTarget = 5;
-let scores = [0, 0];
+// let scoreTarget = 5;
+// let scores = [0, 0];
 
-content.querySelector('#score-submit')._nativeEventListener('click', () => {
-    const score = content.querySelector('#score').value;
-    content.querySelector('#score-value').textContent = score;
+// content.querySelector('#score-submit')._nativeEventListener('click', () => {
+//     const score = content.querySelector('#score').value;
+//     content.querySelector('#score-value').textContent = score;
 
-    scoreTarget = score;
-});
+//     scoreTarget = score;
+// });
 
-content.querySelector('#score')._nativeEventListener('input', (event) => {
-    content.querySelector('#score-current').textContent = event.target.value;
-});
+// content.querySelector('#score')._nativeEventListener('input', (event) => {
+//     content.querySelector('#score-current').textContent = event.target.value;
+// });
 
 content.querySelector('#enable-clip')._nativeEventListener('input', () => {
     if (content.querySelector('#enable-clip').checked) {
@@ -754,60 +754,60 @@ content.querySelector('#enable-clip')._nativeEventListener('input', () => {
 });
 
 
-content.querySelector('#activate-practice')._nativeEventListener('click', () => {
-    if (practicing === true) {
-        for (var [i1, i2, i3, i4] of [
-            [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
-            [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
-        ]]) {
-            i1.x = i1.instVars._x;
-            i1.y = i1.instVars._y;
-            i1.angle = i1.instVars._angle;
-            i1.instVars.angular = i1.instVars._angular;
+// content.querySelector('#activate-practice')._nativeEventListener('click', () => {
+//     if (practicing === true) {
+//         for (var [i1, i2, i3, i4] of [
+//             [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
+//             [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
+//         ]]) {
+//             i1.x = i1.instVars._x;
+//             i1.y = i1.instVars._y;
+//             i1.angle = i1.instVars._angle;
+//             i1.instVars.angular = i1.instVars._angular;
 
-            i2.x = i2.instVars._x;
-            i2.y = i2.instVars._y;  
-            i2.angle = i2.instVars._angle;
-            i2.instVars.angular = i2.instVars._angular;
+//             i2.x = i2.instVars._x;
+//             i2.y = i2.instVars._y;  
+//             i2.angle = i2.instVars._angle;
+//             i2.instVars.angular = i2.instVars._angular;
 
-            i3.x = i3.instVars._x;
-            i3.y = i3.instVars._y;  
-            i3.angle = i3.instVars._angle;
-            i3.instVars.angular = i3.instVars._angular;
+//             i3.x = i3.instVars._x;
+//             i3.y = i3.instVars._y;  
+//             i3.angle = i3.instVars._angle;
+//             i3.instVars.angular = i3.instVars._angular;
 
-            i4.x = i4.instVars._x;
-            i4.y = i4.instVars._y;  
-            i4.angle = i4.instVars._angle;
-            i4.instVars.angular = i4.instVars._angular;
-        }
+//             i4.x = i4.instVars._x;
+//             i4.y = i4.instVars._y;  
+//             i4.angle = i4.instVars._angle;
+//             i4.instVars.angular = i4.instVars._angular;
+//         }
 
-        return practicing = false;
-    }
+//         return practicing = false;
+//     }
 
-    practiceMode();
-});
+//     practiceMode();
+// });
 
-content.querySelector('#activate-oneone')._nativeEventListener('click', () => {
-    if (singlePlayer === true) {
-        for (var [i1, i2, i3, i4] of [
-            [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
-            [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
-        ]]) {
-            i1.x = i1.instVars._x;
-            i1.y = i1.instVars._y;
-            i1.angle = i1.instVars._angle;
-            i1.instVars.angular = i1.instVars._angular;
+// content.querySelector('#activate-oneone')._nativeEventListener('click', () => {
+//     if (singlePlayer === true) {
+//         for (var [i1, i2, i3, i4] of [
+//             [...c3_runtimeInterface._localRuntime._iRuntime.objects.body.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.body4.getAllInstances()], 
+//             [...c3_runtimeInterface._localRuntime._iRuntime.objects.head.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head2.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head3.getAllInstances(), ...c3_runtimeInterface._localRuntime._iRuntime.objects.head4.getAllInstances()
+//         ]]) {
+//             i1.x = i1.instVars._x;
+//             i1.y = i1.instVars._y;
+//             i1.angle = i1.instVars._angle;
+//             i1.instVars.angular = i1.instVars._angular;
 
-            i3.x = i3.instVars._x;
-            i3.y = i3.instVars._y;  
-            i3.angle = i3.instVars._angle;
-            i3.instVars.angular = i3.instVars._angular;
-        }
+//             i3.x = i3.instVars._x;
+//             i3.y = i3.instVars._y;  
+//             i3.angle = i3.instVars._angle;
+//             i3.instVars.angular = i3.instVars._angular;
+//         }
 
-        return singlePlayer = false;
-    }
-    singlePlayers();
-});
+//         return singlePlayer = false;
+//     }
+//     singlePlayers();
+// });
 
 document.getElementById('available-players')._nativeEventListener(
     "submit",
@@ -837,167 +837,167 @@ document.getElementById('connect-button')._nativeEventListener('click', () => {
     sendRequest(`connect:${selectedPlayer}`);
 });
 
-// Make mod menu draggable
-dragElement(modMenu);
+// // Make mod menu draggable
+// dragElement(modMenu);
 
-// Function to make the element draggable
-function dragElement(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.querySelector(elmnt.id + " .title-bar")) {
-        // if present, the header is where you move the DIV from:
-        document.querySelector(elmnt.id + " .title-bar").onmousedown = dragMouseDown;
-    } else {
-        // otherwise, move the DIV from anywhere inside the DIV:
-        elmnt.querySelector('.title-bar').onmousedown = dragMouseDown;
-    }
+// // Function to make the element draggable
+// function dragElement(elmnt) {
+//     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+//     if (document.querySelector(elmnt.id + " .title-bar")) {
+//         // if present, the header is where you move the DIV from:
+//         document.querySelector(elmnt.id + " .title-bar").onmousedown = dragMouseDown;
+//     } else {
+//         // otherwise, move the DIV from anywhere inside the DIV:
+//         elmnt.querySelector('.title-bar').onmousedown = dragMouseDown;
+//     }
 
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        elmnt.querySelector('.title-bar').onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
-    }
+//     function dragMouseDown(e) {
+//         e = e || window.event;
+//         e.preventDefault();
+//         // get the mouse cursor position at startup:
+//         pos3 = e.clientX;
+//         pos4 = e.clientY;
+//         elmnt.querySelector('.title-bar').onmouseup = closeDragElement;
+//         // call a function whenever the cursor moves:
+//         document.onmousemove = elementDrag;
+//     }
 
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    }
+//     function elementDrag(e) {
+//         e = e || window.event;
+//         e.preventDefault();
+//         // calculate the new cursor position:
+//         pos1 = pos3 - e.clientX;
+//         pos2 = pos4 - e.clientY;
+//         pos3 = e.clientX;
+//         pos4 = e.clientY;
+//         // set the element's new position:
+//         elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+//         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+//     }
 
-    function closeDragElement() {
-        // stop moving when mouse button is released:
-        elmnt.querySelector('.title-bar').onmouseup = null;
-        document.onmousemove = null;
-    }
-}
+//     function closeDragElement() {
+//         // stop moving when mouse button is released:
+//         elmnt.querySelector('.title-bar').onmouseup = null;
+//         document.onmousemove = null;
+//     }
+// }
 
-_nativeEventListener('keydown', (event) => {
-    if (event.key === 'm') {
-        document.getElementById('modMenu').classList.toggle('minimized');
-    }
-});
+// _nativeEventListener('keydown', (event) => {
+//     if (event.key === 'm') {
+//         document.getElementById('modMenu').classList.toggle('minimized');
+//     }
+// });
 
-let resolveReady;
+// let resolveReady;
 
-window.basketLoading = new Promise((resolve) => {
-    resolveReady = resolve;
-});
+// window.basketLoading = new Promise((resolve) => {
+//     resolveReady = resolve;
+// });
 
-function newGame() {
-    console.log('starting')
-    newRound();
-}
+// function newGame() {
+//     console.log('starting')
+//     newRound();
+// }
 
-function newRound() {
-    c3_runtimeInterface._localRuntime._pluginManager._allBehaviors[0].SetGravity(parseInt(content.querySelector('#gravity-changer').value));
+// function newRound() {
+//     c3_runtimeInterface._localRuntime._pluginManager._allBehaviors[0].SetGravity(parseInt(content.querySelector('#gravity-changer').value));
 
-    if (singlePlayer === true) {
-        singlePlayers();
-    }
+//     if (singlePlayer === true) {
+//         singlePlayers();
+//     }
 
-    if (practicing === true) {
-        practiceMode();
-    }
-}
+//     if (practicing === true) {
+//         practiceMode();
+//     }
+// }
 
-_nativeEventListener('basket-ready', () => {
-    window.AudioDOMHandler.prototype._Play = new Proxy(window.AudioDOMHandler.prototype._Play, {
-        apply: (target, thisArg, argumentsList) => {
-            console.log(argumentsList[0])
-            if (argumentsList[0].originalUrl === "file") {
-                if (ball.x > 225 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
-                    scores[0] ++;
+// _nativeEventListener('basket-ready', () => {
+//     window.AudioDOMHandler.prototype._Play = new Proxy(window.AudioDOMHandler.prototype._Play, {
+//         apply: (target, thisArg, argumentsList) => {
+//             console.log(argumentsList[0])
+//             if (argumentsList[0].originalUrl === "file") {
+//                 if (ball.x > 225 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
+//                     scores[0] ++;
 
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
             
-                    if (scores[0] >= scoreTarget) {
-                        scores = [0, 0];
-                        return globalVars.p1Score = scoreTarget;
-                    }
+//                     if (scores[0] >= scoreTarget) {
+//                         scores = [0, 0];
+//                         return globalVars.p1Score = scoreTarget;
+//                     }
                 
-                    if (scores[1] >= scoreTarget) {
-                        scores = [0, 0];
-                        return globalVars.p2Score = scoreTarget;
-                    }
+//                     if (scores[1] >= scoreTarget) {
+//                         scores = [0, 0];
+//                         return globalVars.p2Score = scoreTarget;
+//                     }
             
-                    globalVars.p1Score = 0;
-                    globalVars.p2Score = 0;
-                }
+//                     globalVars.p1Score = 0;
+//                     globalVars.p2Score = 0;
+//                 }
             
-                if (ball.x < 80 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
-                    scores[1] ++;
+//                 if (ball.x < 80 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
+//                     scores[1] ++;
 
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
             
-                    if (scores[0] >= scoreTarget) {
-                        scores = [0, 0];
-                        return globalVars.p1Score = scoreTarget;
-                    }
+//                     if (scores[0] >= scoreTarget) {
+//                         scores = [0, 0];
+//                         return globalVars.p1Score = scoreTarget;
+//                     }
                 
-                    if (scores[1] >= scoreTarget) {
-                        scores = [0, 0];
-                        return globalVars.p2Score = scoreTarget;
-                    }
+//                     if (scores[1] >= scoreTarget) {
+//                         scores = [0, 0];
+//                         return globalVars.p2Score = scoreTarget;
+//                     }
             
-                    globalVars.p1Score = 0;
-                    globalVars.p2Score = 0;
-                }
+//                     globalVars.p1Score = 0;
+//                     globalVars.p2Score = 0;
+//                 }
 
-                setTimeout(() => {
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
-                    c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
-                }, 2450);
-            }
-            if (argumentsList[0].originalUrl === "start") {
-                Promise.allSettled([
-                    C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix0.webm', originalUrl: 'remix0', tags: ['music'], loop: true}).then(() => {
-                        return C3Audio_DOMInterface._Stop({url: 'media/remix0.webm', originalUrl: 'remix0', tags: ['music']})
-                    }),
-                    C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix1.webm', originalUrl: 'remix1', tags: ['music'], loop: true}).then(() => {
-                        return C3Audio_DOMInterface._Stop({url: 'media/remix1.webm', originalUrl: 'remix1', tags: ['music']})
-                    }),         
-                    C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix2.webm', originalUrl: 'remix2', tags: ['music'], loop: true}).then(() => {
-                        return C3Audio_DOMInterface._Stop({url: 'media/remix2.webm', originalUrl: 'remix2', tags: ['music']})
-                    })           
-                ]).then(resolveReady);
-            }
-            if (argumentsList[0].originalUrl === "music") {
-                newGame();
+//                 setTimeout(() => {
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(scores[0]));
+//                     c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(scores[1]));
+//                 }, 2450);
+//             }
+//             if (argumentsList[0].originalUrl === "start") {
+//                 Promise.allSettled([
+//                     C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix0.webm', originalUrl: 'remix0', tags: ['music'], loop: true}).then(() => {
+//                         return C3Audio_DOMInterface._Stop({url: 'media/remix0.webm', originalUrl: 'remix0', tags: ['music']})
+//                     }),
+//                     C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix1.webm', originalUrl: 'remix1', tags: ['music'], loop: true}).then(() => {
+//                         return C3Audio_DOMInterface._Stop({url: 'media/remix1.webm', originalUrl: 'remix1', tags: ['music']})
+//                     }),         
+//                     C3Audio_DOMInterface._Play({vol: 1, url: 'media/remix2.webm', originalUrl: 'remix2', tags: ['music'], loop: true}).then(() => {
+//                         return C3Audio_DOMInterface._Stop({url: 'media/remix2.webm', originalUrl: 'remix2', tags: ['music']})
+//                     })           
+//                 ]).then(resolveReady);
+//             }
+//             if (argumentsList[0].originalUrl === "music") {
+//                 newGame();
 
-                /*if (!C3Audio_DOMInterface._audioInstances.find(inst => inst._buffer._originalUrl === "remix0")) {
-                    return (
-                        C3Audio_DOMInterface._Play({vol: 1, url: `media/remix0.webm`, originalUrl: 'remix0', tags: ['music'], loop: true}).then(() => {
-                            return C3Audio_DOMInterface._Stop({url: `media/remix0.webm`, originalUrl: 'remix0', tags: ['music']})
-                        }).then(() => {
-                            C3Audio_DOMInterface._audioInstances.find(inst => inst._buffer._originalUrl === "remix0").Play(true, 0.15, 0, 0);
-                        }),
-                        null
-                    )
-                }
+//                 /*if (!C3Audio_DOMInterface._audioInstances.find(inst => inst._buffer._originalUrl === "remix0")) {
+//                     return (
+//                         C3Audio_DOMInterface._Play({vol: 1, url: `media/remix0.webm`, originalUrl: 'remix0', tags: ['music'], loop: true}).then(() => {
+//                             return C3Audio_DOMInterface._Stop({url: `media/remix0.webm`, originalUrl: 'remix0', tags: ['music']})
+//                         }).then(() => {
+//                             C3Audio_DOMInterface._audioInstances.find(inst => inst._buffer._originalUrl === "remix0").Play(true, 0.15, 0, 0);
+//                         }),
+//                         null
+//                     )
+//                 }
 
-                return;*/
-            }
-            if (argumentsList[0].originalUrl === "refsoc") {
-                console.timeEnd();
-                newRound();
-            }
-            return target.apply(thisArg, argumentsList);
-        }
-    });
-});
+//                 return;*/
+//             }
+//             if (argumentsList[0].originalUrl === "refsoc") {
+//                 console.timeEnd();
+//                 newRound();
+//             }
+//             return target.apply(thisArg, argumentsList);
+//         }
+//     });
+// });
 
 window.bopMusic = async function bopMusic(name) {
     window.ball.instVars.hold = 0;
@@ -1108,67 +1108,67 @@ window.bopMusic = async function bopMusic(name) {
 window.WebGLRenderingContext.prototype.drawElements = null;
 window.WebGL2RenderingContext = null;
 
-window.basketLoading.then(() => setInterval(() => {
-    const ball = window.ball;
+// window.basketLoading.then(() => setInterval(() => {
+//     const ball = window.ball;
 
-    if (practicing === true) {
-        if (ball.x > 225 && ball.y > 75 && ball.y < 80) {
-            resetPractice();
-        }
+//     if (practicing === true) {
+//         if (ball.x > 225 && ball.y > 75 && ball.y < 80) {
+//             resetPractice();
+//         }
 
-        if (ball.x < 80 && ball.y > 75 && ball.y < 80) {
-            resetPractice();
-        }
-    }
+//         if (ball.x < 80 && ball.y > 75 && ball.y < 80) {
+//             resetPractice();
+//         }
+//     }
 
-    let dunkingX = 0;
-    let dunkingY = 0;
-    let headX = 0;
-    let headY = 0;
+//     let dunkingX = 0;
+//     let dunkingY = 0;
+//     let headX = 0;
+//     let headY = 0;
 
-    function dunk(index) {
-        var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (index === 0 ? "" : index)].getAllInstances()[0];
-        var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (index === 0 ? "" : index)].getAllInstances()[0];
-        var arm = c3_runtimeInterface._localRuntime._iRuntime.objects["arm" + (index === 0 ? "" : index)].getAllInstances()[0];
-        dunkingX = player.x;
-        dunkingY = player.y;
-        headX = head.x;
-        headY = head.y
+//     function dunk(index) {
+//         var player = c3_runtimeInterface._localRuntime._iRuntime.objects["body" + (index === 0 ? "" : index)].getAllInstances()[0];
+//         var head = c3_runtimeInterface._localRuntime._iRuntime.objects["head" + (index === 0 ? "" : index)].getAllInstances()[0];
+//         var arm = c3_runtimeInterface._localRuntime._iRuntime.objects["arm" + (index === 0 ? "" : index)].getAllInstances()[0];
+//         dunkingX = player.x;
+//         dunkingY = player.y;
+//         headX = head.x;
+//         headY = head.y
 
-        let intervals = 0;
+//         let intervals = 0;
 
-        let int = setInterval(() => {
-            intervals ++;
+//         let int = setInterval(() => {
+//             intervals ++;
 
-            player.x = dunkingX;
-            player.y = dunkingY;
-            head.x = headX;
-            head.y = headY;
+//             player.x = dunkingX;
+//             player.y = dunkingY;
+//             head.x = headX;
+//             head.y = headY;
 
-            if (intervals >= 3000000) {
-                clearInterval(int);
-            }
-        });
-    }
+//             if (intervals >= 3000000) {
+//                 clearInterval(int);
+//             }
+//         });
+//     }
 
-    for (var [i, head] of enumerate(window.heads)) {
-        if (i === 0 || i === 1) {
-            if (ball.instVars.who === i + 1) {
-                if (head.x < 80 && head.y > 75 && head.y < 80 && head.x > 60) {
-                    dunk(i);
-                }
-            }
-        }
+//     for (var [i, head] of enumerate(window.heads)) {
+//         if (i === 0 || i === 1) {
+//             if (ball.instVars.who === i + 1) {
+//                 if (head.x < 80 && head.y > 75 && head.y < 80 && head.x > 60) {
+//                     dunk(i);
+//                 }
+//             }
+//         }
 
-        if (i === 2 || i === 3) {
-            if (ball.instVars.who === i + 1) {
-                if (head.x > 225 && head.y > 75 && head.y < 80 && head.x < 245) {
-                    dunk(i);
-                }
-            }
-        }
-    }
-}, 0));
+//         if (i === 2 || i === 3) {
+//             if (ball.instVars.who === i + 1) {
+//                 if (head.x > 225 && head.y > 75 && head.y < 80 && head.x < 245) {
+//                     dunk(i);
+//                 }
+//             }
+//         }
+//     }
+// }, 0));
 
 [
     30

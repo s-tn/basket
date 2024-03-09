@@ -1,0 +1,78 @@
+.mod-menu {
+    width: auto;
+    background: #000;
+    border: 1px solid #ccc;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    z-index: 1000;
+}
+
+#gravity-value {
+    width: 15px;
+    display: inline-block;
+    padding-left: 3px;
+}
+
+.mod-menu.minimized {
+    display: none;
+}
+
+.title-bar {
+    background: #333;
+    color: white;
+    padding: 5px;
+    cursor: move;
+}
+
+.content {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.minimize-button {
+    float: right;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+}
+
+.available-players {
+    margin-bottom: 5px;
+}
+
+.multi-id-over {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+#availablePlayers {
+    margin-bottom: 5px;
+}
+
+#score-current {
+    width: 16px;
+    display: inline-block;
+    text-align: center;
+}
+
+.score-val-over {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.content button {
+    margin-left: 5px;
+}
+
+.right h2:first-of-type, .left h2:first-of-type {
+    margin-top: 0;
+}
+
+.menu-title {
+    margin-left: 10px;
+    margin-bottom: 0;
+}

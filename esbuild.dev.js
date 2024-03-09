@@ -1,4 +1,5 @@
 import * as esbuild from "esbuild";
+import cssModulesPlugin from "esbuild-css-modules-plugin";
 
 // await import("./index.js");
 
@@ -13,7 +14,7 @@ const build = await esbuild.context({
   platform: "browser",
   sourcemap: true,
   target: ["es2020"],
-  plugins: [],
+  plugins: [cssModulesPlugin()],
   metafile: true,
 });
 

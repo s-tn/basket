@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basket Random Canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="drawing.css" />
+</head>
+<body>
+    <div id="drawingApp">
+        <label for="brushColor">Brush Color:</label>
+        <input type="color" id="brushColor" name="brushColor">
+    
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" name="brushSize" min="1" max="50" value="5">
+    </div>
+
+    <script src="scripts/drawer.js"></script>
+
+    <iframe src="/" id="gameFrame" name="game" title="game"></iframe>
+</body>
+</html>

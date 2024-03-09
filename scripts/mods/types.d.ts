@@ -2,6 +2,7 @@ interface Global {
     _mod_WS: WebSocket;
     opponent: string;
     basketLoading: Promise<void>;
+    AudioDOMHandler: any;
     multiplayer: boolean;
     players: any[];
     heads: any[];
@@ -31,9 +32,14 @@ interface TabClipper {
 interface ModMenu {
     multiplayer: boolean;
     practicing: boolean;
+    pushing: boolean;
+    singleplayer: boolean;
     ws?: WebSocket;
     opponent: string;
     basketLoading?: Promise<void>;
+    resolveLoading: () => void;
+    setGravity: Dispatch<number>;
+    setScoreTarget: Dispatch<number>;
     players: any[];
     heads: any[];
     ball: any;
@@ -46,6 +52,19 @@ interface ModMenu {
     practicePlayer: number;
     giveBall: (body: number) => void;
     dropBall: () => void;
+    dropBallForce: () => Promise<void>;
+    singlePlayer?: (click?: boolean) => void;
+    practiceMode?: (click?: boolean) => void;
+    pushMode?: (click?: boolean) => void;
+    newGame: () => void;
+    newRound: () => void;
+    content: HTMLDivElement & CustomEventTarget;
+    scoreTarget: number;
+    scores: number[];
+}
+
+interface CustomEventTarget extends EventTarget {
+    _nativeEventListener: (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) => void;
 }
 
 declare global {
@@ -56,6 +75,13 @@ declare global {
 
 interface C3_runtimeInterface {
     _localRuntime: {
+        _pluginManager: {
+            _allBehaviors: any[];
+        }
+        _layoutManager: {
+            _layouts: any[];
+            _layoutsByName: Map<string, any>;
+        }
         _iRuntime: {
             objects: {
                 [key: string]: {
