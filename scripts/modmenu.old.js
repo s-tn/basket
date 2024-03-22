@@ -50,7 +50,7 @@ WS.onmessage = (event) => {
         const id = event.data.split(':')[1];
         window.opponent = id;
 
-        window.basketLoading.then(() => setInterval(() => {
+        window.basketLoading.then(() => setTimeout(() => {
             if (multiplayer === true) {
                 sendRequest(`data-json:${JSON.stringify({
                     type: "event",
@@ -61,7 +61,7 @@ WS.onmessage = (event) => {
                     ball: { x: window.ball.x, y: window.ball.y, instVars: {hold: window.ball.instVars.hold, who: window.ball.instVars.who} },
                 })}`);
             }
-        }, 10));
+        }));
     }
     if (event.data.startsWith('ids-available')) {
         const ids = event.data.split(':')[1].split(',').filter(e => !!e);
@@ -198,6 +198,17 @@ function runJsonData(data = {}) {
             for (let [key, value] of Object.entries(data.ball.instVars)) {
                 ballInstance.instVars[key] = value;
             }
+
+            setTimeout(() => {
+                sendRequest(`data-json:${JSON.stringify({
+                    type: "event",
+                    event: "update",
+                    target: opponent,
+                    players: window.players.map((player) => ({ x: player.x, y: player.y, instVars: player.instVars })),
+                    heads: window.heads.map((head) => ({ x: head.x, y: head.y, instVars: head.instVars })),
+                    ball: { x: window.ball.x, y: window.ball.y, instVars: {hold: window.ball.instVars.hold, who: window.ball.instVars.who} },
+                })}`);
+            }, 25);
         }
     }
 }   
