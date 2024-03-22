@@ -143,8 +143,8 @@ window.addEventListener('react-load', ({
 
     ws(menu);
     gravity(menu);
-    score(menu);
     dunk(menu);
+    menu.scoreChange = score(menu);
     menu.practiceMode = practice(menu);
     menu.singlePlayer = single(menu);
     menu.pushMode = push(menu);

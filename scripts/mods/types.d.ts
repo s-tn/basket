@@ -61,6 +61,7 @@ interface ModMenu {
     content: HTMLDivElement & CustomEventTarget;
     scoreTarget: number;
     scores: number[];
+    scoreChange?: () => void;
 }
 
 interface CustomEventTarget extends EventTarget {

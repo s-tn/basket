@@ -18,54 +18,16 @@ export default function audio(menu: ModMenu) {
     window.addEventListener('basket-ready', () => {
         window.AudioDOMHandler.prototype._Play = new Proxy(window.AudioDOMHandler.prototype._Play, {
             apply: (target, thisArg, argumentsList) => {
-                let ball = window.ball;
+                console.log(argumentsList[0].originalUrl)
                 audioManager.play(argumentsList[0].originalUrl);
-                console.log(argumentsList[0])
-                if (argumentsList[0].originalUrl === "file") {
-                    if (ball.x > 225 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
-                        menu.scores[0] ++;
-    
-                        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(menu.scores[0]));
-                        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
-                
-                        if (menu.scores[0] >= menu.scoreTarget) {
-                            menu.scores = [0, 0];
-                            return window.globalVars.p1Score = menu.scoreTarget;
-                        }
-                    
-                        if (menu.scores[1] >= menu.scoreTarget) {
-                            menu.scores = [0, 0];
-                            return window.globalVars.p2Score = menu.scoreTarget;
-                        }
-                
-                        window.globalVars.p1Score = 0;
-                        window.globalVars.p2Score = 0;
-                    }
-                
-                    if (ball.x < 80 && ball.y > 75 && ball.y < 80 && ball.instVars.hold === 0) {
-                        menu.scores[1] ++;
-    
-                        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(menu.scores[0]));
-                        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
-                
-                        if (menu.scores[0] >= menu.scoreTarget) {
-                            menu.scores = [0, 0];
-                            return window.globalVars.p1Score = menu.scoreTarget;
-                        }
-                    
-                        if (menu.scores[1] >= menu.scoreTarget) {
-                            menu.scores = [0, 0];
-                            return window.globalVars.p2Score = menu.scoreTarget;
-                        }
-                
-                        window.globalVars.p1Score = 0;
-                        window.globalVars.p2Score = 0;
-                    }
-    
+                if (argumentsList[0].originalUrl === "wrong") {
                     setTimeout(() => {
                         c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(menu.scores[0]));
                         c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
-                    }, 2450);
+                    }, 1100);
+                }
+                if (argumentsList[0].originalUrl === "file") {
+                    menu.scoreChange?.();
                 }
                 if (argumentsList[0].originalUrl === "start") {
                     Promise.allSettled([

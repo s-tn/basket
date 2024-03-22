@@ -45,12 +45,58 @@ document.getElementById('brushSize').addEventListener('input', function() {
     brushSize = this.value;
 });
 
+document.getElementById('clearCanvas').addEventListener('click', function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
 addEventListener('keypress', (e) => {
     if (e.key === 'h') {
         canvas.classList.toggle('hidden');
     }
 
+    if (e.key === 'p') {
+        canvas.classList.toggle('no-pointer-events');
+    }
+
     if (e.key === 's') {
         document.querySelector('#gameFrame').contentWindow.c3_runtimeInterface._localRuntime.SetSuspended(true);
     }
+
+    if (e.key === 'r') {
+        document.querySelector('#gameFrame').contentWindow.c3_runtimeInterface._localRuntime.SetSuspended(false);
+    }
+
+    if (e.key === 'c') {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    if (e.key === 'm') {
+        // pass input on to gameframe
+
+        document.querySelector('#gameFrame').contentWindow.dispatchEvent(new KeyboardEvent('keydown', {
+            key: 'm'
+        }));
+    }
 })
+
+addEventListener('load', () => {
+    document.querySelector('#gameFrame').contentWindow._nativeEventListener('keydown', (e) => {
+        if (e.key === 'h') {
+            canvas.classList.toggle('hidden');
+            top.focus();
+        }
+        if (e.key === 'p') {
+            canvas.classList.toggle('no-pointer-events');
+        }
+        if (e.key === 'c') {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        if (e.key === 's') {
+            document.querySelector('#gameFrame').contentWindow.c3_runtimeInterface._localRuntime.SetSuspended(true);
+        }
+    
+        if (e.key === 'r') {
+            document.querySelector('#gameFrame').contentWindow.c3_runtimeInterface._localRuntime.SetSuspended(false);
+        }
+    });
+});
