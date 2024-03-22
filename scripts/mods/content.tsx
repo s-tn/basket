@@ -69,6 +69,20 @@ function App() {
                     <span id="score-current"> { score } </span>
                     <input type="range" id="score" min="0" max="20" value={ score } />
                     <button id="score-submit">Save</button>
+                    <br />
+                    <button id="set-score" onClick={() => {
+                        const input = prompt(`Set the score to:\nCurrent: ${ score }\nFormat: 0-20,0-20`);
+
+                        if (!input) return;
+
+                        const scores = input.split(',');
+
+                        if (scores.length !== 2) return;
+
+                        window.dispatchEvent(new CustomEvent('set-score', {
+                            detail: scores.map(score => parseInt(score))
+                        }));
+                    }}>Set Score</button>
                 </div>
             </div>
         </Fragment>

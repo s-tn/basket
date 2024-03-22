@@ -76,6 +76,7 @@ declare global {
 
 interface C3_runtimeInterface {
     _localRuntime: {
+        SetSuspended: (suspended: boolean) => void;
         _pluginManager: {
             _allBehaviors: any[];
         }

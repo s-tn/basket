@@ -28,6 +28,26 @@ export default function audio(menu: ModMenu) {
                 }
                 if (argumentsList[0].originalUrl === "file") {
                     menu.scoreChange?.();
+
+                    setTimeout(() => {
+                        c3_runtimeInterface._localRuntime.SetSuspended(true);
+
+                        let unsuspended = false;
+
+                        addEventListener('keydown', (event: KeyboardEvent) => {
+                            if (event.key === "Enter") {
+                                c3_runtimeInterface._localRuntime.SetSuspended(false);
+                                unsuspended = true;
+                            }
+                        }, {once: true});
+
+                        setTimeout(() => {
+                            if (unsuspended === true) {
+                                return false;
+                            }
+                            c3_runtimeInterface._localRuntime.SetSuspended(false);
+                        }, 5500);
+                    }, 1500);
                 }
                 if (argumentsList[0].originalUrl === "start") {
                     Promise.allSettled([
@@ -41,6 +61,9 @@ export default function audio(menu: ModMenu) {
                             return C3Audio_DOMInterface._Stop({url: 'media/remix2.webm', originalUrl: 'remix2', tags: ['music']})
                         })           
                     ]).then(menu.resolveLoading);
+                }
+                if (argumentsList[0].originalUrl === "starting") {
+                    menu.scores = [0, 0];
                 }
                 if (argumentsList[0].originalUrl === "music") {
                     menu.newGame();

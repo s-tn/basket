@@ -16,6 +16,24 @@ export default function score(menu: ModMenu) {
     (menu.content.querySelector('#score') as HTMLInputElement & CustomEventTarget)._nativeEventListener('input', (event: Event) => {
         menu.setScoreTarget(((event as KeyboardEvent).target as HTMLInputElement)!.value);
     });
+
+    setInterval(() => {
+        try {
+            c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(menu.scores[0]));
+            c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
+        } catch {
+            return;
+        }
+    }, 500);
+
+    window._nativeEventListener('set-score', (event: Event & { detail: number[] } | any) => {
+        const [p1, p2] = event.detail;
+
+        menu.scores = [p1, p2];
+
+        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(p1));
+        c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(p2));
+    });
     
     return function() {
         let ball = window.ball;
@@ -26,13 +44,35 @@ export default function score(menu: ModMenu) {
             c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
     
             if (menu.scores[0] >= menu.scoreTarget) {
-                menu.scores = [0, 0];
-                return window.globalVars.p1Score = menu.scoreTarget;
+                if (overtime) {
+                    if (
+                        menu.scores[0] - menu.scores[1] === 1
+                        || menu.scores[0] - menu.scores[1] === 0
+                        || menu.scores[0] - menu.scores[1] === -1
+                    ) {
+                        window.globalVars.p1Score = 0;
+                        window.globalVars.p2Score = 0;
+                        return;
+                    }
+                }
+                
+                return window.globalVars.p2Score = menu.scoreTarget;
             }
         
             if (menu.scores[1] >= menu.scoreTarget) {
-                menu.scores = [0, 0];
-                return window.globalVars.p2Score = menu.scoreTarget;
+                if (overtime) {
+                    if (
+                        menu.scores[1] - menu.scores[0] === 1
+                        || menu.scores[1] - menu.scores[0] === 0
+                        || menu.scores[1] - menu.scores[0] === -1
+                    ) {
+                        window.globalVars.p1Score = 0;
+                        window.globalVars.p2Score = 0;
+                        return;
+                    }
+                }
+
+                return window.globalVars.p1Score = menu.scoreTarget;
             }
     
             window.globalVars.p1Score = 0;
@@ -52,12 +92,13 @@ export default function score(menu: ModMenu) {
                         || menu.scores[0] - menu.scores[1] === 0
                         || menu.scores[0] - menu.scores[1] === -1
                     ) {
+                        window.globalVars.p1Score = 0;
+                        window.globalVars.p2Score = 0;
                         return;
                     }
                 }
                 
-                menu.scores = [0, 0];
-                return window.globalVars.p1Score = menu.scoreTarget;
+                return window.globalVars.p2Score = menu.scoreTarget;
             }
         
             if (menu.scores[1] >= menu.scoreTarget) {
@@ -67,21 +108,17 @@ export default function score(menu: ModMenu) {
                         || menu.scores[1] - menu.scores[0] === 0
                         || menu.scores[1] - menu.scores[0] === -1
                     ) {
+                        window.globalVars.p1Score = 0;
+                        window.globalVars.p2Score = 0;
                         return;
                     }
                 }
 
-                menu.scores = [0, 0];
-                return window.globalVars.p2Score = menu.scoreTarget;
+                return window.globalVars.p1Score = menu.scoreTarget;
             }
     
             window.globalVars.p1Score = 0;
             window.globalVars.p2Score = 0;
         }
-
-        setTimeout(() => {
-            c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[2]._sdkInst._SetText(String(menu.scores[0]));
-            c3_runtimeInterface._localRuntime._layoutManager._layoutsByName.get('game')._layersByName.get('ui')._instances[3]._sdkInst._SetText(String(menu.scores[1]));
-        }, 2450);
     }
 }
