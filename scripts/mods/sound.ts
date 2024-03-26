@@ -29,7 +29,7 @@ export default function audio(menu: ModMenu) {
                 if (argumentsList[0].originalUrl === "file") {
                     menu.scoreChange?.();
 
-                    setTimeout(() => {
+                    /*setTimeout(() => {
                         c3_runtimeInterface._localRuntime.SetSuspended(true);
 
                         let unsuspended = false;
@@ -47,7 +47,7 @@ export default function audio(menu: ModMenu) {
                             }
                             c3_runtimeInterface._localRuntime.SetSuspended(false);
                         }, 5500);
-                    }, 1500);
+                    }, 1500);*/
                 }
                 if (argumentsList[0].originalUrl === "start") {
                     Promise.allSettled([
